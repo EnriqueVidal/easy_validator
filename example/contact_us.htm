@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  </head>
+  <body>
+    <form id="my_form">
+      <p>
+        <label>Name</label>
+        <input id="name"class="validatable presence_validation" />
+      </p>
+      <p>
+        <label>Email</label>
+        <input id="email" class="validatable email_validation" />
+      </p>
+      <p>
+        <label>Phone</label>
+        <input id="phone" class="validatable presence_validation phone_validation" data-length="10" />
+      </p>
+      <p>
+        <label>Seats</label>
+        <input id="seats" class="validatable presence_validation numericality_validation" data-length="2" />
+      </p>
+      <p>
+        <label>Custom Validator</label>
+        <input id="code" class="validatable length_validation presence_validation custom_validation" data-max-length="3" data-expression="[a-zA-Z]" />
+      </p>
+      <p>
+        <label>Message</label>
+        <textarea class="validatable presence_validation length_validation" id="message" data-min-length="10" data-max-length="50"></textarea>
+      </p>
+    </form>
+	
+	  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../easy_validator.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('form').easy_validator();        
+      });
+    </script>
+  </body>
+ </html>

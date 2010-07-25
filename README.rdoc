@@ -1,0 +1,92 @@
+== Welcome to easy_validator
+
+easy_validator is a plugin for jQuery that enables web developers to validate web forms by simply setting a class in the validatable elements and calling the plugin, please check the example packaged with the code.
+
+
+== Getting Started
+
+1. Download easy_validator
+2. Add easy_validator and jQuery to your document
+3. Enjoy!
+
+== How to use
+
+To use easy_validator just add a form with elements and set its classes like this:
+
+=== Markup
+  <form method="post" action"myurl">
+    <label>Email</label>
+    <input id="email" class="validatable email_validation" />
+    
+    <label>Message</label>
+    <textare id="message" class="validatable presence_validation"></textarea>
+  </form>
+  
+=== JavaScript
+
+You only need to add easy_validator to the selector of your choice
+
+  $(document).ready(function() {
+    $("form").easy_validator();
+  });
+  
+== Validations supported
+
+easy_validator supports 5 validations out of the box, these are:
+
+- presence_validation
+- email_validation
+- length_validation
+- numericality_validation
+- phone_validation
+
+easy_validator also support custom validations based on regular expressions.
+
+When loaded easy_validator will create an additional label next to each validatable item to warn you about the invalid data inputted or not inputted by the user in that element.
+
+=== Presence Validation
+
+Possibly the simplest of all 3 it only checks that the element is filled with anything.
+
+=== Email Validation
+
+It only checks that anything inputted to the form element match an email address format, when using email validation presence validation is no longer required for this field as an empty value does not match an email address format.
+
+=== Length Validation
+
+It makes use of the data-min-length and data-max-length custom attributes, to tell the exact length of the data inputted to the element, the element should loook like this:
+
+  <textarea class="validatable length_validation" id="message" data-min-length="10" data-max-length="50"></textarea>
+
+=== Numericality and Phone Validation
+
+Numericality and Phone validation are essentially the same, both only allow the user to write numbers in the element, suppressing any other character typed into it, it numericality and phone validation also support a length modifier, the elements should look like this:
+
+  <input id="phone" class="validatable phone_validation" data-length="10" />
+  <input id="seats" class="validatable  numericality_validation" data-length="2" />
+  
+== Nested validations
+
+Nested validations are possible by simple appending more classes to the element like this:
+
+  <input id="seats" class="validatable presence_validation numericality_validation" data-length="2" />
+  
+This will validate the #seats input for presence and numericality with a maximum length of 2.
+
+However be warned that if validations collapse your input would not work for instance:
+
+  <input id="email" class="validatable email_validation numericality_validation" />
+
+While email_validation wil always look for a string formatted as email numericality_validation will only let you write numbers so your validations will never be met.
+
+== Custom Validations
+
+easy_validator enables you to create your own custom validations based on a regular expression just like this:
+
+  <input id="custom" class="validatable custom_validation" data-expression="[a-zA-Z]" />
+
+This will only let you write anything matching the data-expression in the element (in this case upcase and downcase letters). You can also nest other validations with custom validations long as they don't collapse:
+
+  <input id="code" class="validatable length_validation presence_validation custom_validation" data-max-length="3" data-expression="[a-zA-Z]" />
+  
+In this example the #code field will be valid when it contains a string of no more than 3 characters made up of only upcase and downcase letters.
